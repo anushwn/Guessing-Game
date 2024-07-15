@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
+    <title>Guessing game</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header"><h1>Guess a number between 1 to 100</h1></div>
+        <div class="entry">
+            <input type="text" name="" id="input">
+            <button type="button" id="btn">Guess</button>
+            <p class="wrng"></p>
+            <p id="guesses">No. of Guess :0</p>
+        </div>
+    </div>
+    <script>
+        let input=document.getElementById("input")
+        let btn=document.getElementById("btn")
+        let wrng=document.querySelector(".wrng")
+        let guesses=document.getElementById("guesses")
+
+        let answer = Math.floor(Math.random()*100)+1;
+        // console.log(answer);
+        let numGuesses=0;
+        btn.addEventListener("click",()=>{
+            guessesNumber();
+        })
+        function guessesNumber(){
+            if (input.value<1||input.value>100||isNaN(input.value))
+        wrng.innerHTML="Enter between 1 to 100"
+    else{
+        numGuesses++;
+        guesses.innerHTML="No. of Guesses : "+numGuesses;
+        if(input.value>answer){
+            wrng.innerHTML="You guessed higher number"
+            input.value="";
+        }
+        else if(input.value<answer){
+            wrng.innerHTML="You guessed lower number"
+            input.value="";
+        }
+        else{
+            wrng.innerHTML="congratulation You guessed the correct number";
+            setTimeout(() => {
+                resetGame();
+            }, 3000);
+        }
+    }
+}
+function resetGame() {
+    numGuesses=0;
+    answer=Math.floor(Math.random()*100)+1;
+    input.value="";
+    wrng.innerHTML="";
+    guesses.innerHTML="NO. of Guesses:0";
+}
+    </script>
+</body>
+</html>
